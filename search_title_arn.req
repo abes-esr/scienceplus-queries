@@ -1,0 +1,7 @@
+# https://scienceplus.abes.fr/sparql
+# search for articles on 'messenger rna'
+SELECT ?article ?titre ?titreRevue WHERE  
+{?article a bibo:Article, rdac:C10001 ; dcterms:title ?titre ; hub:isPartOfThisJournal ?revue. 
+?revue dcterms:title ?titreRevue. 
+FILTER (CONTAINS(LCASE(?titre),'messenger rna'))}  
+LIMIT 100
