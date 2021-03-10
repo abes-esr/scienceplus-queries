@@ -1,0 +1,17 @@
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX hub: <http://hub.abes.fr/namespace/>
+
+# Corpus list in scienceplus.abes.fr/sparql
+
+SELECT * WHERE {  
+	?corpus a sd:NamedGraph; 
+		dcterms:title ?nom ; 
+		sd:name ?graphe. 
+	OPTIONAL {?corpus dcterms:licence ?licence} 
+	OPTIONAL {?corpus dcterms:rightsHolder ?rightsHolder.} 
+	OPTIONAL {?corpus dcterms:rights ?rights.} 
+	OPTIONAL {?corpus dcterms:description ?description.} 
+	OPTIONAL {?corpus hub:bonus ?enrichissements.} 
+  } 
+ORDER BY ?nom

@@ -1,0 +1,15 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+PREFIX hub: <http://hub.abes.fr/namespace/>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+# For a given author (as identified in the authority records database www.idref.fr), list of journals he/she published in and number of articles per journal
+
+SELECT ?revue (count (?article) AS ?nbpubli) 
+  WHERE { 
+         ?article vivo:relatedBy [vivo:relates <http://www.idref.fr/077229479/id>]; 
+            hub:isPartOfThisJournal ?revue. 
+         ?revue a bibo:Journal ; dcterms:title ?titre 
+        } 
+GROUP BY ?revue 
+ORDER BY DESC (?nbpubli)

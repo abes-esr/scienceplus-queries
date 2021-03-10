@@ -1,5 +1,11 @@
-# https://scienceplus.abes.fr/sparql
-# search for articles on 'messenger rna'
+
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX rdac: <http://rdaregistry.info/Elements/c/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX hub: <http://hub.abes.fr/namespace/>
+
+# search for articles on 'messenger rna' in scienceplus.abes.fr/sparql
+
 SELECT ?article ?titre ?titreRevue WHERE  
 {?article a bibo:Article, rdac:C10001 ; dcterms:title ?titre ; hub:isPartOfThisJournal ?revue. 
 ?revue dcterms:title ?titreRevue. 

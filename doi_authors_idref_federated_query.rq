@@ -1,0 +1,23 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+PREFIX rdaw: <http://rdaregistry.info/Elements/w/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+# For a given DOI, list of authors with info on the fly retrieved from another SPARQL endpoint (data.idref.fr/sparql)
+
+SELECT distinct ?titre ?auteur ?prefLabelIdRef ?nomBaseBiblio ?orcid 
+WHERE  
+  { 
+   ?article dcterms:title ?titre; 
+            vivo:relatedBy [vivo:relates ?auteur]; 
+            rdaw:P10072 [bibo:doi '10.1209/0295-5075/94/27002']. 
+   ?auteur a foaf:Person; 
+           foaf:name ?nomBaseBiblio. 
+   SERVICE <https://data.idref.fr/sparql> 
+    { 
+     ?auteur skos:prefLabel ?prefLabelIdRef. 
+     OPTIONAL {?auteur vivo:orcidId ?orcid} 
+    } 
+}

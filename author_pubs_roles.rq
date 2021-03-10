@@ -1,0 +1,10 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+
+# For a given author (as identified in the authority records database www.idref.fr), list of publications and associated roles
+
+SELECT ?oeuvre ?titre ?role  
+WHERE 
+ {  
+	?oeuvre dcterms:title ?titre ; vivo:relatedBy [vivo:relates <http://www.idref.fr/184032997/id> ; v:hasRole ?role] 
+ }
